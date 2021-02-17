@@ -17,18 +17,22 @@
 
     //instancia e recebe os valores da tela HTML
     Receita receita = new Receita();
-    receita.setId(Integer.parseInt(request.getParameter("id")));
-    receita.setIdUsuario(idUser);
-    receita.setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
-    receita.setDescricao(request.getParameter("descricao"));
-    receita.setValor(Float.parseFloat(request.getParameter("valor")));
-    receita.setData(Date.valueOf(request.getParameter("data")));
+        receita.setId(Integer.parseInt(request.getParameter("id")));
+        receita.setIdUsuario(idUser);
+        receita.setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
+        receita.setDescricao(request.getParameter("descricao"));
 
-    String msg = "";
-    if (receita.alterar()) {
-        msg = "Receita alterada com sucesso!";
-    } else {
-        msg = "Problemas ao alterar Receita!";
-    }
-    response.sendRedirect("informacao.jsp?msg=" + msg);
+        String valor = request.getParameter("valor");
+        valor = valor.replace(".", "");
+        valor = valor.replace(',', '.');
+        receita.setValor(Float.parseFloat(valor));
+        receita.setData(Date.valueOf(request.getParameter("data")));
+
+        String msg = "";
+        if (receita.alterar()) {
+            msg = "Receita alterada com sucesso!";
+        } else {
+            msg = "Problemas ao alterar Receita!";
+        }
+        response.sendRedirect("informacao.jsp?msg=" + msg);
 %>

@@ -82,6 +82,7 @@
                 %>
                 <input type="checkbox" name="filtrarByCategoria"> Filtrar por categoria?</input>
                 <select style="width: 40%" name="categoria">
+                 
                     <%for (Categoria ct : categorias) { %>
                     <option value=<%out.write("" + ct.getId());%>><%out.write(ct.getDescricao());%></option>
                     <%}%>

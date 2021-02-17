@@ -4,6 +4,7 @@
     Author     : entra21
 --%>
 
+<%@page import="utils.ConversorData"%>
 <%@page import="java.sql.Date"%>
 <%@page import="Modelos.Receita"%>
 <%@page contentType="text/html charset=UTF-8" pageEncoding="UTF-8"%>
@@ -20,7 +21,12 @@
     receita.setIdUsuario(idUser);
     receita.setIdCategoria(Integer.parseInt(request.getParameter("idCategoria")));
     receita.setDescricao(request.getParameter("descricao"));
-    receita.setValor(Float.parseFloat(request.getParameter("valor")));
+
+    String valor = request.getParameter("valor");
+    valor = valor.replace(".", "");
+    valor = valor.replace(',', '.');
+
+    receita.setValor(ConversorData.formataMoeda((request.getParameter(valor))));
     receita.setData(Date.valueOf(request.getParameter("data")));
 
     String msg = "";

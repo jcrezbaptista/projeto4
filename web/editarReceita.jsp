@@ -79,8 +79,11 @@
                 <input type="text" name="descricao" value="<%out.write(receita.getDescricao());%>"/> 
                 <br>
                 <br />
-                <label>Informe o valor</label>
-                <input type="text" name="valor" value="<%out.write(ConversorData.formataMoeda(receita.getValor()));%>"/>
+                
+                    <label>Informe o Valor</label>
+                    <input type="text" name="valor" onkeyup="formatarMoeda()" />                
+                
+
                 <br>
                 <br />
                 <label>Informe a data</label>
@@ -91,6 +94,29 @@
             </form>
         </div>  
     <script>
+              function formatarMoeda() {
+            var elemento = document.getElementById('valor');
+            var valor = elemento.value;
+
+            valor = valor + '';
+            valor = parseInt(valor.replace(/[\D]+/g, ''));
+            valor = valor + '';
+            valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+            if (valor.length > 6) {
+                valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+            }
+            debugger;
+            if (valor != "NaN"){
+                elemento.value = valor;
+            }
+            else{
+                elemento.value = "";
+            }
+        }   
+        
+        
+        
         function enviaForm() {
             /*var descricao = document.getElementsByName("descricao");
              if (descricao[0].value === "") {
